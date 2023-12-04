@@ -185,7 +185,7 @@ class Program
         catalog.AddBook(new Book { Title = "Book2", Author = "Author2", ISBN = "222222", Genre = Genre.Romance });
         catalog.AddBook(new Book { Title = "Book3", Author = "Author3", ISBN = "333333", Genre = Genre.Mystery });
         catalog.AddBook(new Book { Title = "Book4", Author = "Author4", ISBN = "444444", Genre = Genre.ScienceFiction });
-
+        catalog.AddBook(new Book { Title = "Book5", Author = "Author5", ISBN = "555555", Genre = Genre.NonFiction });
         // Search for a book
         Book searchedBook = catalog.SearchBook("Book2");
         Console.WriteLine($"Searched Book: {catalog.FormatBook(searchedBook)}");
