@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq; // Add this for ToList()
 
 // Test class for LibraryCatalog
 [TestClass]
