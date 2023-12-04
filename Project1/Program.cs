@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static System.Reflection.Metadata.BlobBuilder;
 
 // Single Responsibility Principle (SRP): Separating concerns into different classes
 
@@ -142,7 +143,19 @@ public class BookIterator : IIterator
     {
         this.catalog = catalog;
     }
+    public IEnumerable<Book> FilterByAuthor(string author)
+    {
+        return books.FindAll(book => book.Author.Equals(author, StringComparison.OrdinalIgnoreCase));
+    }
 
+    // Display books by a specific genre and author
+    public IEnumerable<Book> FilterByGenreAndAuthor(Genre genre, string author)
+    {
+        // Open/Closed Principle (OCP): Using a generic filter for genre
+        IBookFilter genreFilter = new GenreFilter(genre);
+
+        return books.FindAll(book => genreFilter.Filter(book) && book.Author.Equals(author, StringComparison.OrdinalIgnoreCase));
+    }
     public Book First()
     {
         current = 0;
