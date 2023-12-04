@@ -24,10 +24,7 @@ public class Book
     // Change for first check-in (assuming commit) 
     public string TestString = "";
 
-    public override string TestMethod()
-    {
-        return "nothingg";
-    }
+    
 
     public override string ToString()
     {
