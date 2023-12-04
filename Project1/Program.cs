@@ -21,6 +21,8 @@ public class Book
     public string ISBN { get; set; } = "";
     public Genre Genre { get; set; } = Genre.Fiction;
 
+    public string MasterVariable = "";
+
     public override string ToString()
     {
         return $"{Title} by {Author} (ISBN: {ISBN}, Genre: {Genre})";
