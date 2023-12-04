@@ -21,8 +21,6 @@ public class Book
     public string ISBN { get; set; } = "";
     public Genre Genre { get; set; } = Genre.Fiction;
 
-    // Change for first check-in (assuming commit) 
-    public string TestString = "";
 
     // Override ToString for custom string representation of the book
     public override string ToString()
