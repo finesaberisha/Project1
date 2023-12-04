@@ -21,8 +21,10 @@ public class Book
     public string ISBN { get; set; } = "";
     public Genre Genre { get; set; } = Genre.Fiction;
 
-    public string MasterVariable = "";
+    // Change for first check-in (assuming commit) 
+    public string TestString = "";
 
+    // Override ToString for custom string representation of the book
     public override string ToString()
     {
         return $"{Title} by {Author} (ISBN: {ISBN}, Genre: {Genre})";
@@ -32,6 +34,7 @@ public class Book
 // Single Responsibility Principle (SRP): BookFormatter class for formatting books
 public class BookFormatter
 {
+    // FormatBook method for formatting a book into a string
     public string FormatBook(Book book)
     {
         return $"{book.Title} by {book.Author} (ISBN: {book.ISBN}, Genre: {book.Genre})";
@@ -78,6 +81,7 @@ public class GenreFilter : IBookFilter
         this.genre = genre;
     }
 
+    // Filter method to check if a book belongs to a specific genre
     public bool Filter(Book book)
     {
         return book.Genre == genre;
@@ -90,23 +94,28 @@ public class LibraryCatalog : ICatalog
     private List<Book> books = new List<Book>();
     private BookFormatter bookFormatter = new BookFormatter();
 
-    public List<Book> Books => books; // Property to access books list
+    // Property to access the list of books
+    public List<Book> Books => books;
 
+    // Add a book to the catalog
     public void AddBook(Book book)
     {
         books.Add(book);
     }
 
+    // Remove a book from the catalog
     public void RemoveBook(Book book)
     {
         books.Remove(book);
     }
 
+    // Search for a book by title in the catalog
     public Book SearchBook(string title)
     {
         return books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
     }
 
+    // Filter books by genre in the catalog
     public IEnumerable<Book> FilterByGenre(Genre genre)
     {
         // Open/Closed Principle (OCP): Using a generic filter
@@ -114,6 +123,7 @@ public class LibraryCatalog : ICatalog
         return books.FindAll(book => filter.Filter(book));
     }
 
+    // Get an iterator for the catalog
     public IIterator GetIterator()
     {
         return new BookIterator(this);
@@ -137,29 +147,34 @@ public class BookIterator : IIterator
         this.catalog = catalog;
     }
 
+    // Get the first book in the iteration
     public Book First()
     {
         current = 0;
         return catalog.Books.Count > 0 ? catalog.Books[current] : null;
     }
 
+    // Get the next book in the iteration
     public Book Next()
     {
         current++;
         return !IsDone() ? catalog.Books[current] : null;
     }
 
+    // Get the previous book in the iteration
     public Book Previous()
     {
         current--;
         return current >= 0 ? catalog.Books[current] : null;
     }
 
+    // Check if the iteration is done
     public bool IsDone()
     {
         return current >= catalog.Books.Count || current < 0;
     }
 
+    // Get the current book in the iteration
     public Book CurrentItem()
     {
         return catalog.Books.Count > 0 && current >= 0 && current < catalog.Books.Count ? catalog.Books[current] : null;
@@ -179,6 +194,7 @@ class Program
         catalog.AddBook(new Book { Title = "Book2", Author = "Author2", ISBN = "222222", Genre = Genre.Romance });
         catalog.AddBook(new Book { Title = "Book3", Author = "Author3", ISBN = "333333", Genre = Genre.Mystery });
         catalog.AddBook(new Book { Title = "Book4", Author = "Author4", ISBN = "444444", Genre = Genre.ScienceFiction });
+        catalog.AddBook(new Book { Title = "Book5", Author = "Author5", ISBN = "555555", Genre = Genre.NonFiction });
 
         // Search for a book
         Book searchedBook = catalog.SearchBook("Book2");
