@@ -63,7 +63,7 @@ public class LibraryCatalogTests
         catalog.AddBook(book2);
 
         // Act
-        var filteredBooks = catalog.FilterByGenre(Genre.Romance);
+        var filteredBooks = catalog.FilterByGenre(Genre.Romance).ToList(); // Fix: Convert to List
 
         // Assert
         CollectionAssert.Contains(filteredBooks, book2);
